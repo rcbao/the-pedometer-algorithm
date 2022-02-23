@@ -9,13 +9,15 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import pandas as pd
 
-WINDOW_SIZE = 50
+WINDOW_SIZE = 200
 
 
+# round a number to 2 decimal points
 def round_two_digits(input_num):
     return round(float(input_num), 2)
 
 
+# get the rollowing average of a pandas series
 def get_rolling_avg(input_series, window_size):
     windows = input_series.rolling(window_size)
 
