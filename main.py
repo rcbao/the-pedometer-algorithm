@@ -4,48 +4,46 @@
 # File: main.py
 # The signal analysis code for pedometer analysis
 
-print("HELLO cs 4501!")
-
 import csv
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MaxNLocator
+import pandas as pd
 
-file = open('data/acc_data.csv') # read the csv file
+WINDOW_SIZE = 50
 
-csvreader = csv.reader(file)
 
-header = []
+def round_two_digits(input_num):
+    return round(float(input_num), 2)
 
-header = next(csvreader) # put the headers into an array
 
-rows = []
+def get_rolling_avg(input_series, window_size):
+    windows = input_series.rolling(window_size)
 
-for row in csvreader: # read all the data into rows
-    rows.append(row)
+    # Create a list of moving averages
+    moving_averages = windows.mean().tolist()
+    return moving_averages[window_size - 1:]
 
-# print(rows)
 
-# print(header)
+df = pd.read_csv('data/acc_data.csv')
+time = df["Time (s)"]
+acc_x = df["Acceleration x (m/s^2)"]
+print(type(acc_x))
 
-time = [] # initialize the time and acceleration for each axes
-ax = []
-ay = []
-az = []
+avg_time = get_rolling_avg(time, WINDOW_SIZE)
+avg_acc_x = get_rolling_avg(acc_x, WINDOW_SIZE)
 
-for row in rows:
-    time.append(row[0]) # appending all values into the array
-    ax.append(row[1])
-    ay.append(row[2])
-    az.append(row[3])
-
-print(time)
-
-plt.plot(time,ax)
+# print(time)
+plt.plot(avg_time, avg_acc_x)
 plt.xlabel('Time (s)')
 plt.ylabel('Acceleration (m/s^2)')
+<<<<<<< HEAD
 
 
 locs, labels = plt.xticks()  # Get the current locations and labels
+=======
+>>>>>>> 6872f9b157b530e53d29de22f52f142aa8601ac9
 
-plt.xticks([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+plt.gca().yaxis.set_major_locator(MaxNLocator(5))
+plt.gca().xaxis.set_major_locator(MaxNLocator(10))
 
 plt.show()
