@@ -42,6 +42,8 @@ print(time)
 plt.plot(time,ax)
 plt.xlabel('Time (s)')
 plt.ylabel('Acceleration (m/s^2)')
+
+
 locs, labels = plt.xticks()  # Get the current locations and labels
 
 plt.xticks([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
