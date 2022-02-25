@@ -42,17 +42,18 @@ def threshold_fn(x, threshold=3, step=2):
 
 # input file: imported phyphox accelerometer -- without g
 # also try: walk-10-step-2022-2-24-v2.csv !
-filename = "data/walk-10-step-2022-2-24-v2.csv"
+# Note: This will not work with data with g. (The value range is different)
+filename = "data/walk-10-step-2022-2-24-v1.csv"
 df = pd.read_csv(filename)
 time = df["Time (s)"]
-acc_x = df["Linear Acceleration y (m/s^2)"]
+acc = df["Linear Acceleration y (m/s^2)"]
 
 avg_time = get_rolling_avg(time, WINDOW_SIZE)
-avg_acc_x = get_rolling_avg(acc_x, WINDOW_SIZE)
+avg_acc = get_rolling_avg(acc, WINDOW_SIZE)
 
 # find out if the data trend is increasing
-series_avg_acc_x = pd.Series(avg_acc_x)
-increasing_elements = series_avg_acc_x.diff().ge(0)
+series_avg_acc = pd.Series(avg_acc)
+increasing_elements = series_avg_acc.diff().ge(0)
 
 # shifted trend (local minima)
 shifted = increasing_elements.ne(increasing_elements.shift())
@@ -61,8 +62,8 @@ shifted = increasing_elements.ne(increasing_elements.shift())
 local_max = shifted & (~increasing_elements)
 
 # generate the step data by grouping sthe acceleration by the threshold
-step = series_avg_acc_x.groupby(local_max.cumsum()).apply(threshold_fn)
-step += series_avg_acc_x.min()
+step = series_avg_acc.groupby(local_max.cumsum()).apply(threshold_fn)
+step += series_avg_acc.min()
 
 # difference from the previous row
 step_change = step - step.shift(1)
@@ -72,7 +73,7 @@ value_count = step_change.value_counts()
 positive_count = value_count[value_count.index > 0].iloc[0]
 
 # plot the data using matplotlib
-plt.plot(avg_time, avg_acc_x)
+plt.plot(avg_time, avg_acc)
 plt.plot(avg_time, step, drawstyle='steps')
 
 # plotting settings
