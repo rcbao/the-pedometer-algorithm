@@ -1,5 +1,5 @@
 # Name: Kathleen Nguyen, Robert Bao
-# Email ID: cb5th
+# Email ID: kn7wz, cb5th
 # Date: 2021-2-23
 # File: main.py
 # The signal analysis code for pedometer analysis
