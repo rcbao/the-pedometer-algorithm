@@ -40,15 +40,17 @@ def threshold_fn(x, threshold=3, step=2):
     return res
 
 
-filename = "data/walk-10-step-2022-2-24-v1.csv"
+# input file: imported phyphox accelerometer -- without g
+# also try: walk-10-step-2022-2-24-v2.csv !
+filename = "data/walk-10-step-2022-2-24-v2.csv"
 df = pd.read_csv(filename)
 time = df["Time (s)"]
-acc_x = df["Acceleration y (m/s^2)"]
+acc_x = df["Linear Acceleration y (m/s^2)"]
 
 avg_time = get_rolling_avg(time, WINDOW_SIZE)
 avg_acc_x = get_rolling_avg(acc_x, WINDOW_SIZE)
 
-# if the data trend is increasing
+# find out if the data trend is increasing
 series_avg_acc_x = pd.Series(avg_acc_x)
 increasing_elements = series_avg_acc_x.diff().ge(0)
 
@@ -65,12 +67,15 @@ step += series_avg_acc_x.min()
 # difference from the previous row
 step_change = step - step.shift(1)
 
+# generate the final value count
 value_count = step_change.value_counts()
 positive_count = value_count[value_count.index > 0].iloc[0]
 
+# plot the data using matplotlib
 plt.plot(avg_time, avg_acc_x)
 plt.plot(avg_time, step, drawstyle='steps')
 
+# plotting settings
 plt.xlabel('Time (s)')
 plt.ylabel('Acceleration (m/s^2)')
 plt.gca().yaxis.set_major_locator(MaxNLocator(5))
