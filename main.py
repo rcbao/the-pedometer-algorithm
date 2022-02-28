@@ -73,15 +73,25 @@ value_count = step_change.value_counts()
 positive_count = value_count[value_count.index > 0].iloc[0]
 
 # plot the data using matplotlib
-plt.plot(avg_time, avg_acc)
-plt.plot(avg_time, step, drawstyle='steps')
+fig, ax = plt.subplots()
+
+ax.plot(avg_time, avg_acc, label="The Average Acceleration")
+ax.plot(avg_time, step, drawstyle='steps', label="Step")
+ax.legend()
 
 # plotting settings
-plt.xlabel('Time (s)')
-plt.ylabel('Acceleration (m/s^2)')
-plt.gca().yaxis.set_major_locator(MaxNLocator(5))
-plt.gca().xaxis.set_major_locator(MaxNLocator(10))
+ax.set_xlabel('Time (s)')
+ax.set_ylabel('Acceleration $(m/s^2)$')
+ax.yaxis.set_major_locator(MaxNLocator(5))
+ax.xaxis.set_major_locator(MaxNLocator(10))
 
+title_style = {
+    'verticalalignment': 'baseline',
+    'horizontalalignment': "center"
+}
+text = "Pedometer Data Results (Total: {num} steps)".format(num=positive_count)
+plt.style.use('seaborn')
+plt.title(label=text, fontdict=title_style)
 plt.show()
 
 print("=========================")
