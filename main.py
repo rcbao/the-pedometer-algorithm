@@ -36,12 +36,9 @@ avg_acc_x = get_rolling_avg(acc_x, WINDOW_SIZE)
 plt.plot(avg_time, avg_acc_x)
 plt.xlabel('Time (s)')
 plt.ylabel('Acceleration (m/s^2)')
-<<<<<<< HEAD
 
 
 locs, labels = plt.xticks()  # Get the current locations and labels
-=======
->>>>>>> 6872f9b157b530e53d29de22f52f142aa8601ac9
 
 plt.gca().yaxis.set_major_locator(MaxNLocator(5))
 plt.gca().xaxis.set_major_locator(MaxNLocator(10))
