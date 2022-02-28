@@ -43,7 +43,7 @@ def threshold_fn(x, threshold=3, step=2):
 # input file: imported phyphox accelerometer -- without g
 # also try: walk-10-step-2022-2-24-v2.csv !
 # Note: This will not work with data with g. (The value range is different)
-filename = "data/walk-10-step-2022-2-24-v1.csv"
+filename = "data\walk-10-step-2022-2-24-v1.csv"
 df = pd.read_csv(filename)
 time = df["Time (s)"]
 acc = df["Linear Acceleration y (m/s^2)"]
@@ -79,13 +79,6 @@ plt.plot(avg_time, step, drawstyle='steps')
 # plotting settings
 plt.xlabel('Time (s)')
 plt.ylabel('Acceleration (m/s^2)')
-<<<<<<< HEAD
-
-
-locs, labels = plt.xticks()  # Get the current locations and labels
-
-=======
->>>>>>> 2dc238d4e03405d5f34dddbc6e859d732f307eb0
 plt.gca().yaxis.set_major_locator(MaxNLocator(5))
 plt.gca().xaxis.set_major_locator(MaxNLocator(10))
 
