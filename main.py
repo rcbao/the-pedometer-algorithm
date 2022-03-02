@@ -43,7 +43,7 @@ def threshold_fn(x, threshold=3, step=2):
 # input file: imported phyphox accelerometer -- without g
 # also try: walk-10-step-2022-2-24-v2.csv !
 # Note: This will not work with data with g. (The value range is different)
-filename = "data\walk-10-step-2022-2-24-v1.csv"
+filename = "data/walk-11-step-2022-3-2-v1.csv"
 df = pd.read_csv(filename)
 time = df["Time (s)"]
 acc = df["Linear Acceleration y (m/s^2)"]
