@@ -2,7 +2,7 @@
 
 A Python program for counting steps using just smartphones sensor data. It includes both an analysis component (for off-line data analysis) and a visualization component for the data.
 
-This program is tested in real-world datasets with a 90% accuracy. The project is built with Python, Pandas, Numpy, and Matplotlib. It is created during the Engineering Interactive Technologies course at UVA.
+This program is tested in real-world datasets with a 90% accuracy. The project is built with Python, Pandas, Numpy, and Matplotlib. It is created during the Engineering Interactive Technologies course at UVA, with [Kathleen Nguyen](https://www.linkedin.com/in/kathleen-nguyen-11a99921a/).
 
 ## Set up
 
